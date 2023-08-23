@@ -7,10 +7,10 @@ import lombok.Getter;
 public class Doll {
 
     private String name;
-    private int price;
+    private double price;
     private int stock;
 
-    public Doll(String name, int price, int stock) {
+    public Doll(String name, double price, int stock) {
         this.name = name;
         this.price = price;
         this.stock = stock;
@@ -20,7 +20,7 @@ public class Doll {
         this.name = name;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

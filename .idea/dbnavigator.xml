@@ -13,7 +13,16 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="c19a2e16-adc6-4b89-949a-a4fbae305ebc">
-      <console name="Connection" type="STANDARD" schema="dolls" session="Main"><![CDATA[SELECT * FROM doll;]]></console>
+      <console name="Connection" type="STANDARD" schema="dolls" session="Main"><![CDATA[CREATE TABLE doll (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    price DOUBLE PRECISION NOT NULL,
+    stock INT NOT NULL
+);
+
+DROP TABLE doll;
+
+SELECT * FROM doll;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">

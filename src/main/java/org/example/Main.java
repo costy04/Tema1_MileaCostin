@@ -25,7 +25,7 @@ public class Main {
                 return "Done";
             });
             post("/dolls/:name/:price/:stock", (req, res) -> {
-                insertDoll(req.params(":name"), Integer.parseInt(req.params(":price")), Integer.parseInt(req.params(":stock")));
+                insertDoll(req.params(":name"), Double.parseDouble(req.params(":price")), Integer.parseInt(req.params(":stock")));
                 return "Done insert";
             });
             post("/dolls/delete/:name", (req, res) -> {
@@ -33,7 +33,7 @@ public class Main {
                 return "Done delete";
             });
             put("/dolls/update/:name/:price/:stock", (req, res) -> {
-                updateDoll(req.params(":name"), Integer.parseInt(req.params(":price")), Integer.parseInt(req.params(":stock")));
+                updateDoll(req.params(":name"), Double.parseDouble(req.params(":price")), Integer.parseInt(req.params(":stock")));
                 return "Done update";
             });
             get("/dolls/:id", (req, res) -> {
@@ -52,7 +52,7 @@ public class Main {
             ps = connection.createStatement();
             ResultSet rs = ps.executeQuery("SELECT * FROM doll;");
             while (rs.next()) {
-                Doll d = new Doll(rs.getString("name"), rs.getInt("price"), rs.getInt("stock"));
+                Doll d = new Doll(rs.getString("name"), rs.getDouble("price"), rs.getInt("stock"));
                 System.out.println(d);
             }
         } catch (SQLException e) {
@@ -68,7 +68,7 @@ public class Main {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                Doll d = new Doll(rs.getString("name"), rs.getInt("price"), rs.getInt("stock"));
+                Doll d = new Doll(rs.getString("name"), rs.getDouble("price"), rs.getInt("stock"));
                 System.out.println(d);
             }
             else {
@@ -79,12 +79,12 @@ public class Main {
         }
     }
 
-    private static void insertDoll(String name, int price, int stock) {
+    private static void insertDoll(String name, double price, int stock) {
         PreparedStatement ps2 = null;
         try {
             ps2 = connection.prepareStatement("INSERT INTO doll (name, price, stock) VALUES ( ?, ?, ?);");
             ps2.setString(1, name);
-            ps2.setInt(2, price);
+            ps2.setDouble(2, price);
             ps2.setInt(3, stock);
             ps2.execute();
         } catch (SQLException e) {
@@ -105,11 +105,11 @@ public class Main {
 
     }
 
-    private static void updateDoll(String name, int price, int stock) {
+    private static void updateDoll(String name, double price, int stock) {
         PreparedStatement ps2 = null;
         try {
             ps2 = connection.prepareStatement("UPDATE doll SET price = ?, stock = ? WHERE name = ?;");
-            ps2.setInt(1, price);
+            ps2.setDouble(1, price);
             ps2.setInt(2, stock);
             ps2.setString(3, name);
             ps2.execute();
